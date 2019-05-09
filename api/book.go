@@ -86,3 +86,33 @@ func BookHandleFunc(w http.ResponseWriter, r *http.Request){
 	// then we write back the response structure
 	w.Write(b)
 }
+
+// GetBook returns the book for a given ISBN
+func GetBook(isbn string) (Book, bool) {
+	book, found := books[isbn]
+	return book, found
+}
+
+// CreateBook creates a new Book if it does not exist
+func CreateBook(book Book) (string, bool) {
+	_, exists := books[book.ISBN]
+	if exists {
+		return "", false
+	}
+	books[book.ISBN] = book
+	return book.ISBN, true
+}
+
+// UpdateBook updates an existing book
+func UpdateBook(isbn string, book Book) bool {
+	_, exists := books[isbn]
+	if exists {
+		books[isbn] = book
+	}
+	return exists
+}
+
+// DeleteBook removes a book from the map by ISBN key
+func DeleteBook(isbn string) {
+	delete(books, isbn)
+}

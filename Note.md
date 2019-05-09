@@ -27,9 +27,8 @@ Microservice will be deployed in Kubernetics
 
 ## Challenges and Design Principles
 ### Challenges
-* 
 
-###Design Principles
+### Design Principles
 * Performance: responsive, concurrency, efficiency
 * Automation: automate dev tasks and ops task
 * Resiliency: fault tolerant and self healing
@@ -58,12 +57,12 @@ Code, contains runtime environment, and API for the application
 
 #### Cluster Operation system
 
-####Orchestrator 
+##### Orchestrator 
 Concern with running whole application, talks to the scheduler to run specific containers and tells it how many instances is needed.
 
-#### Scheduler
+##### Scheduler
 Concern with containers, and manages the resources and executes the individual container for those resources
 
-#### Virtualization
+##### Virtualization
 Concern with resources in the cluster, decouples everything above it
 
