@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	_"encoding/json"
+	"io/ioutil"
 	"net/http"
 	)
 
@@ -75,16 +76,32 @@ func writeJSON(w http.ResponseWriter, i interface{}) {
 // postman http://localhost:9090/api/books send a get request should return the Books Json
 
 func BookHandleFunc(w http.ResponseWriter, r *http.Request){
-	// take Books slice and marshall to json
-	// we get back the byte array of success or err
-	b, err :=json.Marshal(books)
-	if err != nil {
-		panic(err)
+	isbn := r.URL.Path[len("/api/books/"):]
+
+	switch method :=r.Method; method {
+	case http.MethodGet:
+		book, found := GetBook(isbn)
+		if found {
+			writeJSON(w, book)
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	case http.MethodPut:
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+		}
+		book := FromJSON(body)
+		exists := UpdateBook(isbn, book)
+		if exists {
+			w.WriteHeader(http.StatusOK)
+		}else {
+			w.WriteHeader(http.StatusNotFound)
+		}
+	default:
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write([]byte("Unsupported request method."))
 	}
-	// Now we have Json data we tell the client
-	w.Header().Add("Content-Type", "application/json; charset=utf-8")
-	// then we write back the response structure
-	w.Write(b)
 }
 
 // GetBook returns the book for a given ISBN
