@@ -1,0 +1,23 @@
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main(){
+	http.HandleFunc("/", index)
+	http.ListenAndServe(":8080", nil)
+
+}
+
+func index(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprint(w, "Hello Cloud Native Go")
+}
+
+
+
+//go run microservice.go
+// go to postman http://localhost:8080/ , send a get request
+// response should be " Hello Cloud Native"
