@@ -9,9 +9,12 @@ import (
 
 func main(){
 	http.HandleFunc("/", index)
-	//HandleFun which responds to API echo and call a function echo
 	http.HandleFunc("api/echo", echo)
+
+	// rest endpoint to retrieve all books and store books
 	http.HandleFunc("/api/books", api.BooksHandleFunc)
+	//rest end point to retrieve individual book by isbn, to update and delete them
+	http.HandleFunc("api/books/", api.BookHandleFunc)
 	http.ListenAndServe(port(), nil)
 
 }
