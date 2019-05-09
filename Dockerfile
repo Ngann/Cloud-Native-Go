@@ -1,4 +1,4 @@
-FROM golang
+FROM golang:1.12.5-alpine3.9
 MAINTAINER Ngan Nguyen
 
 ENV SOURCES /go/src/native

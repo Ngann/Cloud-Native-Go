@@ -93,39 +93,3 @@ Build docker image from file:
 
 Tag and Push docker image to docker hub:
 
-
-
-```
-Cereals-MBP:native cereal$ docker build -t cloud-native-go:1.0.0 .
-Sending build context to Docker daemon  11.82MB
-Step 1/8 : FROM golang
- ---> 7ced090ee82e
-Step 2/8 : MAINTAINER Ngan Nguyen
- ---> Using cache
- ---> 2ac167ffbdb2
-Step 3/8 : ENV SOURCES /go/src/native
- ---> Running in 87fd69331f15
-Removing intermediate container 87fd69331f15
- ---> 3ac0852ee81b
-Step 4/8 : COPY . $SOURCES
- ---> 8838c1f9a380
-Step 5/8 : RUN cd ${SOURCES} && CGO_ENABLED=0 go install
- ---> Running in ae19490cc181
-Removing intermediate container ae19490cc181
- ---> f5f8504599ed
-Step 6/8 : ENV PORT 8080
- ---> Running in 457ced0d9559
-Removing intermediate container 457ced0d9559
- ---> 9233c186cc38
-Step 7/8 : EXPOSE 8080
- ---> Running in 434e16882da4
-Removing intermediate container 434e16882da4
- ---> a7d90cfe43b0
-Step 8/8 : ENTRYPOINT Cloud-Native-Go
- ---> Running in 1bccd1fc8711
-Removing intermediate container 1bccd1fc8711
- ---> 41e097db9c64
-Successfully built 41e097db9c64
-Successfully tagged cloud-native-go:1.0.0
-
-```
