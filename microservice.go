@@ -2,13 +2,16 @@ package main
 
 import (
 	"fmt"
+	"native/api"
 	"net/http"
 	"os"
 )
 
 func main(){
 	http.HandleFunc("/", index)
+	//HandleFun which responds to API echo and call a function echo
 	http.HandleFunc("api/echo", echo)
+	http.HandleFunc("/api/books", api.BooksHandleFunc)
 	http.ListenAndServe(port(), nil)
 
 }
