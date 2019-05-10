@@ -14,7 +14,7 @@ ENV PORT 8080
 EXPOSE 8080
 
 #name of the executable to build
-ENTRYPOINT Cloud-Native-Go
+ENTRYPOINT native
 
 
 #docker build -t cloud-native-go:1.0.0 .
